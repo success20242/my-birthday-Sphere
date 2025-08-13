@@ -10,7 +10,7 @@
   <meta property="og:description" content="Celebrate this beautiful day! Today is my special day. Join me for a magical birthday experience." />
   <meta property="og:image" content="https://i.imgur.com/pkdsfGo.jpeg" />
   <meta property="og:type" content="video.other" />
-  <meta property="og:video" content="https://raw.githubusercontent.com/<username>/<repo>/main/media/birthday.mp4" />
+  <meta property="og:video" content="https://raw.githack.com/success20242/my-birthday-Sphere/main/media/birthday.mp4" />
   <meta property="og:video:type" content="video/mp4" />
   <meta property="og:video:width" content="960" />
   <meta property="og:video:height" content="540" />
@@ -41,40 +41,33 @@
 </head>
 <body>
 <div class="stage" id="stage">
-  <!-- Main Video -->
   <video id="mainVideo" playsinline muted preload="auto" crossorigin="anonymous">
-    <source src="https://raw.githubusercontent.com/<username>/<repo>/main/media/birthday.mp4" type="video/mp4">
+    <source src="https://raw.githack.com/success20242/my-birthday-Sphere/main/media/birthday.mp4" type="video/mp4">
   </video>
 
-  <!-- Background flute audio -->
   <audio id="bgAudio" loop>
-    <source src="https://raw.githubusercontent.com/<username>/<repo>/main/media/flute.mp3" type="audio/mpeg">
+    <source src="https://raw.githack.com/success20242/my-birthday-Sphere/main/media/flute.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Gunshot audio -->
   <audio id="gunAudio">
-    <source src="https://raw.githubusercontent.com/<username>/<repo>/main/media/gunshot.mp3" type="audio/mpeg">
+    <source src="https://raw.githack.com/success20242/my-birthday-Sphere/main/media/gunshot.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Center Play Button -->
   <div class="playCenter" id="playCenter">
     <div class="playCircle btn" id="playBtn" aria-label="Play">
       <div class="playTriangle"></div>
     </div>
   </div>
 
-  <!-- Controls -->
   <div class="controls">
     <div class="btn" id="unmuteBtn">UNMUTE</div>
     <div class="btn" id="restartBtn">RESTART</div>
   </div>
 
-  <!-- Sphere Overlay -->
   <div class="sphereOverlay" id="sphereOverlay" aria-hidden="true">
     <div class="sphere" id="sphere"></div>
   </div>
 
-  <!-- Inner Gallery -->
   <div class="innerGallery" id="innerGallery" style="display:none">
     <div class="galleryFrame">
       <img class="galleryImg" id="galleryImg" src="" alt="inside" />
@@ -92,37 +85,47 @@ const playCenter = document.getElementById('playCenter');
 const playBtn = document.getElementById('playBtn');
 const unmuteBtn = document.getElementById('unmuteBtn');
 const restartBtn = document.getElementById('restartBtn');
-const sphereOverlay = document.getElementById('sphereOverlay');
 const sphere = document.getElementById('sphere');
 const innerGallery = document.getElementById('innerGallery');
-const galleryImg = document.getElementById('galleryImg');
 const glowText = document.getElementById('glowText');
-const particlesCanvas = document.getElementById('particlesCanvas');
-
 const bgAudio = document.getElementById('bgAudio');
 const gunAudio = document.getElementById('gunAudio');
 
-let sphereShown = false;
+// Play Button
+playBtn.addEventListener('click', () => {
+  video.play();
+  bgAudio.play();
+  gunAudio.play();
+  playCenter.style.display = 'none';
+  // Sphere animation
+  sphere.classList.add('big');
+  setTimeout(() => {
+    innerGallery.style.display = 'flex';
+    glowText.classList.add('in');
+  }, 900);
+});
 
-// Sphere Images
-const sphereImages = [
-  'https://images.playground.com/cmea0rjov063afna5f2fe3s7r-preview.png',
-  'https://images.playground.com/cmea12xqv02vj99s86m2it4sy-preview.png',
-  'https://images.playground.com/cmea15dnx030i99s8o201fn64-preview.png',
-  'https://images.playground.com/cmea17t1606xbfna56d6hf0ea-preview.png',
-  'https://images.playground.com/cmea1agc50091i1yy3ihyk0u1-preview.png',
-  'https://i.imgur.com/AX0EHJT.jpeg' // Baby boy
-];
+// Unmute
+unmuteBtn.addEventListener('click', () => {
+  video.muted = !video.muted;
+  bgAudio.muted = !bgAudio.muted;
+  gunAudio.muted = !gunAudio.muted;
+  unmuteBtn.textContent = video.muted ? 'UNMUTE' : 'MUTE';
+});
 
-// Messages
-const messages = [
-  'Celebrate your day with joy and love!',
-  'Born to shine. Today is special.',
-  'Grateful, blessed, and ready for new adventures.'
-];
-
-const SPHERE_DURATION = 8500;
-
-// Canvas resize
-function resizeCanvas(){
-  particlesCanvas.width = particlesCanvas.clientWidth
+// Restart
+restartBtn.addEventListener('click', () => {
+  video.currentTime = 0;
+  video.play();
+  bgAudio.currentTime = 0;
+  bgAudio.play();
+  gunAudio.currentTime = 0;
+  gunAudio.play();
+  innerGallery.style.display = 'none';
+  glowText.classList.remove('in');
+  sphere.classList.remove('big');
+  playCenter.style.display = 'flex';
+});
+</script>
+</body>
+</html>

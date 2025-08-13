@@ -10,7 +10,7 @@
   <meta property="og:description" content="Celebrate this beautiful day! Today is my special day. Join me for a magical birthday experience." />
   <meta property="og:image" content="https://i.imgur.com/pkdsfGo.jpeg" />
   <meta property="og:type" content="video.other" />
-  <meta property="og:video" content="https://i.imgur.com/ScX1SJO.mp4" />
+  <meta property="og:video" content="https://raw.githubusercontent.com/<username>/<repo>/main/media/birthday.mp4" />
   <meta property="og:video:type" content="video/mp4" />
   <meta property="og:video:width" content="960" />
   <meta property="og:video:height" content="540" />
@@ -26,7 +26,7 @@
     .playCircle{width:110px;height:110px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12), rgba(255,255,255,0.02));border:2px solid rgba(255,255,255,0.08);backdrop-filter:blur(6px)}
     .playTriangle{width:0;height:0;border-left:22px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:6px}
     .sphereOverlay{position:absolute;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;pointer-events:none}
-    .sphere{width:140px;height:140px;border-radius:999px;background:radial-gradient(circle at 30% 25%, rgba(255,255,255,0.12), rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 8px 40px rgba(255,170,55,0.06), 0 0 120px rgba(255,165,0,0.05) inset;transform-origin:center center}
+    .sphere{width:140px;height:140px;border-radius:999px;background:radial-gradient(circle at 30% 25%, rgba(255,255,255,0.12), rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 8px 40px rgba(255,170,55,0.06), 0 0 120px rgba(255,165,0.05) inset;transform-origin:center center}
     @keyframes sphereExpand{0%{transform:scale(1);opacity:1}30%{transform:scale(1.5)}60%{transform:scale(18);opacity:1}100%{transform:scale(28);opacity:1}}
     .sphere.big{animation:sphereExpand 850ms cubic-bezier(.2,.9,.1,1) forwards}
     .innerGallery{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:45;pointer-events:auto;display:flex;flex-direction:column;align-items:center;gap:14px}
@@ -43,18 +43,17 @@
 <div class="stage" id="stage">
   <!-- Main Video -->
   <video id="mainVideo" playsinline muted preload="auto" crossorigin="anonymous">
-    <source src="https://i.imgur.com/ScX1SJO.mp4" type="video/mp4">
-    Your browser does not support HTML5 video.
+    <source src="https://raw.githubusercontent.com/<username>/<repo>/main/media/birthday.mp4" type="video/mp4">
   </video>
 
-  <!-- Background Music -->
+  <!-- Background flute audio -->
   <audio id="bgAudio" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    <source src="https://raw.githubusercontent.com/<username>/<repo>/main/media/flute.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Gun salute -->
+  <!-- Gunshot audio -->
   <audio id="gunAudio">
-    <source src="https://eu-central.storage.cloudconvert.com/tasks/eb698170-c9dd-4ee0-8f34-ed82c523525e/21gunsalute%20%28mp3cut.net%29.mp3" type="audio/mpeg">
+    <source src="https://raw.githubusercontent.com/<username>/<repo>/main/media/gunshot.mp3" type="audio/mpeg">
   </audio>
 
   <!-- Center Play Button -->
@@ -80,7 +79,7 @@
     <div class="galleryFrame">
       <img class="galleryImg" id="galleryImg" src="" alt="inside" />
     </div>
-    <div class="glowText" id="glowText">Celebrate greatness — today is the day.</div>
+    <div class="glowText" id="glowText">Celebrate your day with joy and love!</div>
   </div>
 
   <canvas class="particles" id="particlesCanvas"></canvas>
@@ -105,99 +104,25 @@ const gunAudio = document.getElementById('gunAudio');
 
 let sphereShown = false;
 
+// Sphere Images
 const sphereImages = [
   'https://images.playground.com/cmea0rjov063afna5f2fe3s7r-preview.png',
   'https://images.playground.com/cmea12xqv02vj99s86m2it4sy-preview.png',
   'https://images.playground.com/cmea15dnx030i99s8o201fn64-preview.png',
   'https://images.playground.com/cmea17t1606xbfna56d6hf0ea-preview.png',
   'https://images.playground.com/cmea1agc50091i1yy3ihyk0u1-preview.png',
-  'https://i.imgur.com/AX0EHJT.jpeg'
+  'https://i.imgur.com/AX0EHJT.jpeg' // Baby boy
 ];
 
+// Messages
 const messages = [
-  'Celebrate greatness — today is my day.',
-  'Born to shine. Built to win.',
-  'Grateful, blessed, and ready.'
+  'Celebrate your day with joy and love!',
+  'Born to shine. Today is special.',
+  'Grateful, blessed, and ready for new adventures.'
 ];
 
 const SPHERE_DURATION = 8500;
 
+// Canvas resize
 function resizeCanvas(){
-  particlesCanvas.width = particlesCanvas.clientWidth * devicePixelRatio;
-  particlesCanvas.height = particlesCanvas.clientHeight * devicePixelRatio;
-  particlesCanvas.style.width = particlesCanvas.clientWidth + 'px';
-  particlesCanvas.style.height = particlesCanvas.clientHeight + 'px';
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-function runParticles(duration){
-  const ctx = particlesCanvas.getContext('2d');
-  const W = particlesCanvas.width;
-  const H = particlesCanvas.height;
-  const parts = [];
-  for(let i=0;i<60;i++){
-    parts.push({x:Math.random()*W,y:-Math.random()*H/2,vy:2+Math.random()*6,rot:Math.random()*360,s:6+Math.random()*10});
-  }
-  let t=0;
-  function frame(){
-    ctx.clearRect(0,0,W,H);
-    for(const p of parts){
-      ctx.save();
-      ctx.translate(p.x,p.y);
-      ctx.rotate(p.rot*Math.PI/180);
-      ctx.fillStyle = `rgba(${200+Math.floor(Math.random()*55)},${120+Math.floor(Math.random()*135)},${80+Math.floor(Math.random()*120)},0.95)`;
-      ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*0.6);
-      ctx.restore();
-      p.y+=p.vy;p.rot+=4;if(p.y>H+20){p.y=-20;p.x=Math.random()*W;}
-    }
-    t+=16;
-    if(t<duration){requestAnimationFrame(frame);}else{ctx.clearRect(0,0,W,H);}
-  }
-  requestAnimationFrame(frame);
-}
-
-function startPlayback(){video.play().catch(()=>{});playCenter.style.display='none';}
-playBtn.addEventListener('click',()=>{startPlayback();});
-unmuteBtn.addEventListener('click',()=>{if(bgAudio.paused){bgAudio.play();unmuteBtn.textContent='MUTED';}else{bgAudio.pause();unmuteBtn.textContent='UNMUTE';}});
-restartBtn.addEventListener('click',()=>{video.currentTime=0;video.play();playCenter.style.display='none';});
-
-let imgIndex=0;
-function showNextGalleryImage(){galleryImg.style.opacity=0;setTimeout(()=>{galleryImg.src=sphereImages[imgIndex%sphereImages.length];imgIndex++;galleryImg.onload=()=>{galleryImg.style.opacity=1;}},400);}
-function showSphereSequence(){
-  if(sphereShown) return;
-  sphereShown=true;
-  video.pause();
-  sphereOverlay.style.pointerEvents='auto';sphereOverlay.style.opacity=1;sphere.classList.add('big');
-  setTimeout(()=>{
-    innerGallery.style.display='flex';
-    showNextGalleryImage();
-    glowText.textContent=messages[0];
-    setTimeout(()=>{glowText.classList.add('in');},200);
-    runParticles(5000);
-    let m=1;
-    const tick=setInterval(()=>{
-      if(m>=messages.length) m=0;
-      glowText.classList.remove('in');
-      setTimeout(()=>{glowText.textContent=messages[m];glowText.classList.add('in');m++;showNextGalleryImage();},300);
-    },2500);
-    setTimeout(()=>{clearInterval(tick);glowText.classList.remove('in');innerGallery.style.display='none';sphere.classList.remove('big');sphereOverlay.style.opacity=0;sphereOverlay.style.pointerEvents='none';video.play();gunAudio.play();},SPHERE_DURATION);
-  },700);
-}
-
-video.addEventListener('timeupdate',()=>{
-  if(!video.duration) return;
-  if(video.currentTime>=(video.duration/2)&&!sphereShown){
-    const flash=document.createElement('div');
-    flash.style.position='absolute';flash.style.inset=0;flash.style.background='radial-gradient(circle at 50% 50%, rgba(255,255,255,0.9), rgba(255,200,60,0.15), rgba(0,0,0,0))';
-    flash.style.zIndex=39;flash.style.opacity=0;flash.style.transition='opacity .18s ease-out';
-    document.getElementById('stage').appendChild(flash);
-    requestAnimationFrame(()=>{flash.style.opacity=1;setTimeout(()=>{flash.style.opacity=0;setTimeout(()=>flash.remove(),220);},120);});
-    const s=document.getElementById('stage');
-    s.style.transition='transform .22s ease';s.style.transform='scale(1.02)';setTimeout(()=>{s.style.transform='scale(1)';},220);
-    showSphereSequence();
-  }
-});
-</script>
-</body>
-</html>
+  particlesCanvas.width = particlesCanvas.clientWidth

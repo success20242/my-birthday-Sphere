@@ -43,13 +43,13 @@
 <div class="stage" id="stage">
   <!-- Main Video -->
   <video id="mainVideo" playsinline muted preload="auto" crossorigin="anonymous">
-    <source id="vidSrc" src="https://i.imgur.com/ScX1SJO.mp4" type="video/mp4">
+    <source src="https://i.imgur.com/ScX1SJO.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
 
   <!-- Background Music -->
   <audio id="bgAudio" loop>
-    <source src="https://screenapp.io/app/#/shared/910e5PC-XN" type="audio/mpeg">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
   </audio>
 
   <!-- Gun salute -->
@@ -105,17 +105,15 @@ const gunAudio = document.getElementById('gunAudio');
 
 let sphereShown = false;
 
-// Sphere Images
 const sphereImages = [
   'https://images.playground.com/cmea0rjov063afna5f2fe3s7r-preview.png',
   'https://images.playground.com/cmea12xqv02vj99s86m2it4sy-preview.png',
   'https://images.playground.com/cmea15dnx030i99s8o201fn64-preview.png',
   'https://images.playground.com/cmea17t1606xbfna56d6hf0ea-preview.png',
   'https://images.playground.com/cmea1agc50091i1yy3ihyk0u1-preview.png',
-  'https://i.imgur.com/AX0EHJT.jpeg' // Baby boy
+  'https://i.imgur.com/AX0EHJT.jpeg'
 ];
 
-// Messages
 const messages = [
   'Celebrate greatness — today is my day.',
   'Born to shine. Built to win.',
@@ -124,7 +122,6 @@ const messages = [
 
 const SPHERE_DURATION = 8500;
 
-// Canvas resize
 function resizeCanvas(){
   particlesCanvas.width = particlesCanvas.clientWidth * devicePixelRatio;
   particlesCanvas.height = particlesCanvas.clientHeight * devicePixelRatio;
@@ -134,7 +131,6 @@ function resizeCanvas(){
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
-// Confetti
 function runParticles(duration){
   const ctx = particlesCanvas.getContext('2d');
   const W = particlesCanvas.width;
@@ -150,4 +146,58 @@ function runParticles(duration){
       ctx.save();
       ctx.translate(p.x,p.y);
       ctx.rotate(p.rot*Math.PI/180);
-      ctx.fillStyle = `rgba(${200+Math
+      ctx.fillStyle = `rgba(${200+Math.floor(Math.random()*55)},${120+Math.floor(Math.random()*135)},${80+Math.floor(Math.random()*120)},0.95)`;
+      ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*0.6);
+      ctx.restore();
+      p.y+=p.vy;p.rot+=4;if(p.y>H+20){p.y=-20;p.x=Math.random()*W;}
+    }
+    t+=16;
+    if(t<duration){requestAnimationFrame(frame);}else{ctx.clearRect(0,0,W,H);}
+  }
+  requestAnimationFrame(frame);
+}
+
+function startPlayback(){video.play().catch(()=>{});playCenter.style.display='none';}
+playBtn.addEventListener('click',()=>{startPlayback();});
+unmuteBtn.addEventListener('click',()=>{if(bgAudio.paused){bgAudio.play();unmuteBtn.textContent='MUTED';}else{bgAudio.pause();unmuteBtn.textContent='UNMUTE';}});
+restartBtn.addEventListener('click',()=>{video.currentTime=0;video.play();playCenter.style.display='none';});
+
+let imgIndex=0;
+function showNextGalleryImage(){galleryImg.style.opacity=0;setTimeout(()=>{galleryImg.src=sphereImages[imgIndex%sphereImages.length];imgIndex++;galleryImg.onload=()=>{galleryImg.style.opacity=1;}},400);}
+function showSphereSequence(){
+  if(sphereShown) return;
+  sphereShown=true;
+  video.pause();
+  sphereOverlay.style.pointerEvents='auto';sphereOverlay.style.opacity=1;sphere.classList.add('big');
+  setTimeout(()=>{
+    innerGallery.style.display='flex';
+    showNextGalleryImage();
+    glowText.textContent=messages[0];
+    setTimeout(()=>{glowText.classList.add('in');},200);
+    runParticles(5000);
+    let m=1;
+    const tick=setInterval(()=>{
+      if(m>=messages.length) m=0;
+      glowText.classList.remove('in');
+      setTimeout(()=>{glowText.textContent=messages[m];glowText.classList.add('in');m++;showNextGalleryImage();},300);
+    },2500);
+    setTimeout(()=>{clearInterval(tick);glowText.classList.remove('in');innerGallery.style.display='none';sphere.classList.remove('big');sphereOverlay.style.opacity=0;sphereOverlay.style.pointerEvents='none';video.play();gunAudio.play();},SPHERE_DURATION);
+  },700);
+}
+
+video.addEventListener('timeupdate',()=>{
+  if(!video.duration) return;
+  if(video.currentTime>=(video.duration/2)&&!sphereShown){
+    const flash=document.createElement('div');
+    flash.style.position='absolute';flash.style.inset=0;flash.style.background='radial-gradient(circle at 50% 50%, rgba(255,255,255,0.9), rgba(255,200,60,0.15), rgba(0,0,0,0))';
+    flash.style.zIndex=39;flash.style.opacity=0;flash.style.transition='opacity .18s ease-out';
+    document.getElementById('stage').appendChild(flash);
+    requestAnimationFrame(()=>{flash.style.opacity=1;setTimeout(()=>{flash.style.opacity=0;setTimeout(()=>flash.remove(),220);},120);});
+    const s=document.getElementById('stage');
+    s.style.transition='transform .22s ease';s.style.transform='scale(1.02)';setTimeout(()=>{s.style.transform='scale(1)';},220);
+    showSphereSequence();
+  }
+});
+</script>
+</body>
+</html>

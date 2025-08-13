@@ -1,33 +1,38 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Born to Shine — August 14</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Born to Shine — August 14</title>
 
-<!-- Facebook Meta Tags -->
-<meta property="og:title" content="Onyekachi Ebosi — August 14 Birthday" />
-<meta property="og:description" content="Celebrate this beautiful day! Today is my special day. Join me for a magical birthday experience." />
-<meta property="og:image" content="https://i.imgur.com/pkdsfGo.jpeg" />
+  <style>
+    html, body {height:100%; margin:0; font-family: 'Segoe UI', Roboto, Arial, sans-serif;}
+    body {background: linear-gradient(135deg, #11111a, #1c1c28); display:flex; align-items:center; justify-content:center; padding:20px; color:#fff;}
 
-<style>
-html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;background:#0a0a0f;color:#fff;display:flex;align-items:center;justify-content:center}
-.stage{width:100%;max-width:960px;height:540px;position:relative;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.6);background:#11111a}
-.sphereOverlay{position:absolute;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;pointer-events:none}
-.sphere{width:160px;height:160px;border-radius:999px;background:radial-gradient(circle at 30% 25%, rgba(255,255,255,0.15), rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 8px 40px rgba(255,170,55,0.05), 0 0 120px rgba(255,165,0,0.03) inset;transform-origin:center center;transition:transform 0.8s ease-in-out}
-.sphere.big{transform:scale(25);}
-.innerGallery{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:45;pointer-events:auto;display:flex;flex-direction:column;align-items:center;gap:14px}
-.galleryFrame{width:420px;height:210px;border-radius:12px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.05);background:linear-gradient(180deg,#00000088,#00000088);display:flex;align-items:center;justify-content:center}
-.galleryImg{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
-.glowText{font-size:28px;font-weight:700;text-align:center;line-height:1.1;text-shadow:0 0 10px rgba(255,200,80,0.2),0 0 28px rgba(255,140,0,0.1),0 2px 0 rgba(0,0,0,0.6);opacity:0;transform:translateY(6px);transition:all .9s cubic-bezier(.2,.8,.2,1)}
-.glowText.in{opacity:1;transform:translateY(0)}
-.particles{position:absolute;inset:0;pointer-events:none;z-index:46}
-.credit{position:absolute;right:14px;bottom:12px;z-index:50;font-size:12px;color:#ddd;opacity:.9}
-@media(max-width:680px){.stage{height:420px}.galleryFrame{width:320px;height:170px}.glowText{font-size:20px}}
-</style>
+    .stage {position:relative; width:100%; max-width:960px; height:540px; border-radius:16px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center;}
+
+    .sphereOverlay {position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none;}
+    .sphere {width:200px; height:200px; border-radius:50%; box-shadow:0 8px 40px rgba(255,170,55,0.15), 0 0 120px rgba(255,165,0,0.05) inset; background-size:cover; background-position:center; transition: all 0.8s ease;}
+
+    .innerGallery {position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); z-index:10; display:flex; flex-direction:column; align-items:center; gap:14px;}
+    .galleryFrame {width:420px; height:210px; border-radius:12px; overflow:hidden; box-shadow:0 20px 40px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.06); background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center;}
+    .galleryImg {width:100%; height:100%; object-fit:cover; opacity:1;}
+
+    .glowText {font-size:28px; font-weight:700; text-align:center; line-height:1.2; text-shadow:0 0 10px rgba(255,200,80,0.25),0 0 28px rgba(255,140,0,0.12);}
+
+    .particles {position:absolute; inset:0; pointer-events:none; z-index:5;}
+    .credit {position:absolute; right:14px; bottom:12px; font-size:12px; color:#ddd; opacity:0.9;}
+
+    @media(max-width:680px){
+      .stage {height:420px;}
+      .galleryFrame {width:320px; height:170px;}
+      .glowText {font-size:20px;}
+      .sphere {width:150px; height:150px;}
+    }
+  </style>
 </head>
 <body>
-<div class="stage" id="stage">
+<div class="stage">
 
   <!-- Background Music -->
   <audio id="bgAudio" loop autoplay>
@@ -35,104 +40,82 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe 
   </audio>
 
   <!-- Sphere Overlay -->
-  <div class="sphereOverlay" id="sphereOverlay" aria-hidden="true">
+  <div class="sphereOverlay">
     <div class="sphere" id="sphere"></div>
   </div>
 
   <!-- Inner Gallery -->
-  <div class="innerGallery" id="innerGallery" style="display:none">
+  <div class="innerGallery">
     <div class="galleryFrame">
-      <img class="galleryImg" id="galleryImg" src="" alt="inside" />
+      <img class="galleryImg" src="https://i.imgur.com/AX0EHJT.jpeg" alt="Baby Boy"/>
     </div>
-    <div class="glowText" id="glowText">Celebrate greatness — today is your day!</div>
+    <div class="glowText">Celebrate greatness — today is your day!</div>
   </div>
 
+  <!-- Confetti Particles -->
   <canvas class="particles" id="particlesCanvas"></canvas>
+
   <div class="credit">August 14 — Celebrate Onyekachi</div>
 </div>
 
 <script>
-const sphereOverlay = document.getElementById('sphereOverlay');
-const sphere = document.getElementById('sphere');
-const innerGallery = document.getElementById('innerGallery');
-const glowText = document.getElementById('glowText');
-const particlesCanvas = document.getElementById('particlesCanvas');
-const bgAudio = document.getElementById('bgAudio');
-
-// Sphere Images
-const sphereImages = [
-  'https://images.playground.com/cmea0rjov063afna5f2fe3s7r-preview.png',
-  'https://images.playground.com/cmea12xqv02vj99s86m2it4sy-preview.png',
-  'https://images.playground.com/cmea15dnx030i99s8o201fn64-preview.png',
-  'https://images.playground.com/cmea17t1606xbfna56d6hf0ea-preview.png',
-  'https://images.playground.com/cmea1agc50091i1yy3ihyk0u1-preview.png',
-  'https://i.imgur.com/AX0EHJT.jpeg'
-];
-
-// Rotate sphere images
-let currentSphere = 0;
-function rotateSphere(){
-  sphere.style.backgroundImage = `url(${sphereImages[currentSphere]})`;
-  sphere.style.backgroundSize = 'cover';
-  sphere.style.backgroundPosition = 'center';
-  currentSphere = (currentSphere+1)%sphereImages.length;
-}
-setInterval(rotateSphere, 2000); // Change every 2 seconds
-rotateSphere();
-
-const SPHERE_DURATION = 8500;
-
-// Canvas resize
-function resizeCanvas(){
-  particlesCanvas.width = particlesCanvas.clientWidth * devicePixelRatio;
-  particlesCanvas.height = particlesCanvas.clientHeight * devicePixelRatio;
-  particlesCanvas.style.width = particlesCanvas.clientWidth + 'px';
-  particlesCanvas.style.height = particlesCanvas.clientHeight + 'px';
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-// Confetti
-function runParticles(duration){
-  const ctx = particlesCanvas.getContext('2d');
-  const W = particlesCanvas.width;
-  const H = particlesCanvas.height;
-  const parts = [];
-  for(let i=0;i<60;i++){
-    parts.push({x:Math.random()*W,y:-Math.random()*H/2,vy:2+Math.random()*6,rot:Math.random()*360,s:6+Math.random()*10});
+  // Sphere rotation
+  const sphere = document.getElementById('sphere');
+  const sphereImages = [
+    'https://images.playground.com/cmea0rjov063afna5f2fe3s7r-preview.png',
+    'https://images.playground.com/cmea12xqv02vj99s86m2it4sy-preview.png',
+    'https://images.playground.com/cmea15dnx030i99s8o201fn64-preview.png',
+    'https://images.playground.com/cmea17t1606xbfna56d6hf0ea-preview.png',
+    'https://images.playground.com/cmea1agc50091i1yy3ihyk0u1-preview.png',
+    'https://i.imgur.com/AX0EHJT.jpeg'
+  ];
+  let currentSphere = 0;
+  function rotateSphere(){
+    sphere.style.backgroundImage = `url(${sphereImages[currentSphere]})`;
+    currentSphere = (currentSphere+1)%sphereImages.length;
   }
-  let t=0;
-  function frame(){
-    ctx.clearRect(0,0,W,H);
-    for(const p of parts){
-      ctx.save();
-      ctx.translate(p.x,p.y);
-      ctx.rotate(p.rot*Math.PI/180);
-      ctx.fillStyle = `rgba(${200+Math.random()*55},${100+Math.random()*155},${50+Math.random()*205},0.8)`;
-      ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s);
-      p.y += p.vy; p.rot += 4;
-      if(p.y>H){p.y=-10;}
-      ctx.restore();
-    }
-    t+=16;
-    if(t<duration) requestAnimationFrame(frame);
+  rotateSphere();
+  setInterval(rotateSphere, 2500);
+
+  // Confetti particles
+  const canvas = document.getElementById('particlesCanvas');
+  const ctx = canvas.getContext('2d');
+  function resizeCanvas(){
+    canvas.width = canvas.clientWidth * devicePixelRatio;
+    canvas.height = canvas.clientHeight * devicePixelRatio;
+    ctx.scale(devicePixelRatio, devicePixelRatio);
   }
-  frame();
-}
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
 
-// Show sphere animation
-function showSphere(){
-  sphere.classList.add('big');
-  innerGallery.style.display = 'flex';
-  glowText.classList.add('in');
-  runParticles(SPHERE_DURATION);
-}
+  const confetti = [];
+  for(let i=0;i<80;i++){
+    confetti.push({
+      x: Math.random()*canvas.clientWidth,
+      y: Math.random()*canvas.clientHeight,
+      r: 4+Math.random()*6,
+      d: Math.random()*80,
+      color: `hsl(${Math.random()*50+40}, 100%, 60%)`,
+      tilt: Math.random()*10-10
+    });
+  }
 
-// Auto-run on page load
-window.addEventListener('load', ()=>{
-  bgAudio.play().catch(()=>{});
-  showSphere();
-});
+  function drawConfetti(){
+    ctx.clearRect(0,0,canvas.clientWidth,canvas.clientHeight);
+    confetti.forEach(c=>{
+      ctx.beginPath();
+      ctx.moveTo(c.x+c.tilt, c.y);
+      ctx.lineTo(c.x+c.tilt+2, c.y+c.r);
+      ctx.strokeStyle=c.color;
+      ctx.lineWidth=2;
+      ctx.stroke();
+      c.y += (Math.cos(0.01*c.d)+1+2)/2;
+      c.x += Math.sin(0.01*c.d);
+      if(c.y>canvas.clientHeight){c.y=-10; c.x=Math.random()*canvas.clientWidth;}
+    });
+    requestAnimationFrame(drawConfetti);
+  }
+  drawConfetti();
 </script>
 </body>
 </html>
